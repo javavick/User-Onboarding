@@ -58,10 +58,14 @@ const FormikMainForm = withFormik({
       .required("This field is required")
   }),
 
-  handleSubmit(values, { resetForm }) {
+  handleSubmit(values, { props, resetForm }) {
     axios
       .post("https://reqres.in/api/users", values)
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res);
+        props.setUsers([...props.users, res.data]);
+        resetForm();
+      })
       .catch((err) => console.log(err));
   }
 })(MainForm);

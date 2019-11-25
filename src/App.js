@@ -1,10 +1,17 @@
-import React from "react";
-import logo from "./logo.svg";
+import React, { useState } from "react";
 import "./App.css";
-import FormikMainForm from "./Form.js";
+import FormikMainForm from "./components/Form.js";
+import Users from "./components/Users.js";
 
 function App() {
-  return <FormikMainForm />;
+  const [users, setUsers] = useState([]);
+
+  return (
+    <div>
+      <Users users={users} />
+      <FormikMainForm users={users} setUsers={setUsers} />
+    </div>
+  );
 }
 
 export default App;
