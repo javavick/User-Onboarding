@@ -1,6 +1,7 @@
 import React from "react";
 import { withFormik, Form, Field } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
 
 function MainForm({ errors, touched, values }) {
   return (
@@ -57,8 +58,11 @@ const FormikMainForm = withFormik({
       .required("This field is required")
   }),
 
-  handleSubmit(values) {
-    console.log(values);
+  handleSubmit(values, { resetForm }) {
+    axios
+      .post("https://reqres.in/api/users", values)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
   }
 })(MainForm);
 
